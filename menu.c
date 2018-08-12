@@ -5,6 +5,7 @@
 #include <coreinit/time.h>
 #include <coreinit/systeminfo.h>
 #include <coreinit/thread.h>
+#include <sysapp/launch.h>
 
 void DrawIntro(){
 
@@ -16,6 +17,48 @@ void DrawIntro(){
 
 }
 
+void DrawOptionsMenu(){
+
+    int i = 3;
+
+    VPADStatus vpad;
+    int error;
+
+    for (;;){
+
+        CleanBuffer();
+
+        OSScreenPutFontEx(0, 0, 0, "OPTIONS");
+        OSScreenPutFontEx(0, 2, 3, "Video");
+        OSScreenPutFontEx(0, 2, 4, "Wifi");
+        OSScreenPutFontEx(0, 2, 5, "Theme");
+        OSScreenPutFontEx(0, 2, 6, "Back");
+
+        OSScreenPutFontEx(1, 0, 0, "OPTIONS");
+        OSScreenPutFontEx(1, 2, 3, "Video");
+        OSScreenPutFontEx(1, 2, 4, "Wifi");
+        OSScreenPutFontEx(1, 2, 5, "Theme");
+        OSScreenPutFontEx(1, 2, 6, "Back");
+
+
+        OSScreenPutFontEx(0, 0, i, "->");
+        OSScreenPutFontEx(1, 0, i, "->");
+        VPADRead(0, &vpad, 1, &error);
+            if (!error){
+                if(vpad.trigger & VPAD_BUTTON_DOWN && i < 6){
+                    ++i;
+                }
+                if(vpad.trigger & VPAD_BUTTON_UP && i > 3){
+                    --i;
+                }
+                if (vpad.trigger & VPAD_BUTTON_A && i == 6){
+                    break;
+                }
+            }
+            VidRefresh();
+            OSSleepTicks(OSMillisecondsToTicks(16.67));
+    }
+}
 
 void DrawMainMenu(){
 
@@ -28,23 +71,36 @@ void DrawMainMenu(){
 
         CleanBuffer();
 
-        OSScreenPutFontEx(0, 2, 0, "OPTIONS");
-        OSScreenPutFontEx(0, 2, 3, "Start up");
-        OSScreenPutFontEx(0, 2, 4, "Video");
-        OSScreenPutFontEx(0, 2, 5, "Sound");
-        OSScreenPutFontEx(0, 2, 6, "Wifi");
+        OSScreenPutFontEx(0, 0, 0, "MAIN MENU");
+        OSScreenPutFontEx(0, 2, 3, "Games");
+        OSScreenPutFontEx(0, 2, 4, "Debug");
+        OSScreenPutFontEx(0, 2, 5, "Options");
+        OSScreenPutFontEx(0, 2, 6, "Exit");
+
+        OSScreenPutFontEx(1, 0, 0, "MAIN MENU");
+        OSScreenPutFontEx(1, 2, 3, "Games");
+        OSScreenPutFontEx(1, 2, 4, "Debug");
+        OSScreenPutFontEx(1, 2, 5, "Options");
+        OSScreenPutFontEx(1, 2, 6, "Exit");
 
 
         OSScreenPutFontEx(0, 0, i, "->");
+        OSScreenPutFontEx(1, 0, i, "->");
         VPADRead(0, &vpad, 1, &error);
             if (!error){
-                if(vpad.trigger & VPAD_BUTTON_DOWN && i < 10){
+                if(vpad.trigger & VPAD_BUTTON_DOWN && i < 6){
                     ++i;
                 }
                 if(vpad.trigger & VPAD_BUTTON_UP && i > 3){
                     --i;
                 }
                 if (vpad.trigger & VPAD_BUTTON_HOME){
+                    break;
+                }
+                if (vpad.trigger & VPAD_BUTTON_A && i == 5){
+                    DrawOptionsMenu();
+                }
+                if (vpad.trigger & VPAD_BUTTON_A && i == 6){
                     break;
                 }
             }

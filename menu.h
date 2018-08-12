@@ -2,6 +2,7 @@
 #define MENU_H_INCLUDED
 
 void DrawIntro();
+void DrawOptionsMenu();
 void DrawMainMenu();
 
 #endif // MENU_H_INCLUDED
