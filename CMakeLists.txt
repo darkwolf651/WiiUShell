@@ -6,7 +6,9 @@ add_executable(wiiushell
    main.c
    video.c
    menu.c
-   )
+   draw.c
+   theme.c
+   IO.c)
 
 target_link_libraries(wiiushell
    coreinit

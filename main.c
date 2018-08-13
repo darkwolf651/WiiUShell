@@ -6,6 +6,7 @@
 #include <coreinit/exit.h>
 #include <vpad/input.h>
 #include <whb/proc.h>
+#include <whb/sdcard.h>
 
 #include "video.h"
 #include "menu.h"
@@ -17,6 +18,7 @@ int main(int argc, char **argv)
     WHBProcInit();
     VidInit();
     VPADInit();
+    WHBMountSdCard();
 
     DrawIntro();
     VidRefresh();
@@ -40,6 +42,7 @@ int main(int argc, char **argv)
     exit:
         VidClear();
         OSScreenShutdown();
+        WHBUnmountSdCard();
         WHBProcShutdown();
         return 0;
 }
