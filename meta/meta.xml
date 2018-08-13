@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<app version="1">
+  <name>Wii U Shell</name>
+  <coder>Demothens</coder>
+  <version>Alpha 0.2.0</version>
+  <release_date>20180812000000</release_date>
+  <short_description>Replacement menu for Wii U</short_description>
+  <long_description>Replacement menu for Wii U
+
+This is a work in progress project. Most features are missing, and the GUI is currently designed only for the ease of testing.
+
+Current features of this project are a simple GUI, a theme system, a debug menu for testing and the beginning of a save system to allow changed settings to persist. </long_description>
+<category>System</category>
+<url>https://github.com/darkwolf651/WiiUShell</url>
+</app>
